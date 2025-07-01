@@ -1,0 +1,93 @@
+📚 Node js Architecture: 
+Node js is built on Chrome's V8 Engine which is written in C++ language.
+
+🔄 Process vs Thread:
+Process: A process is created when a program starts executing.
+Thread: Threads are smaller units of execution inside a process. Multiple threads can exist within a single process.
+In Node.js, by default, only one main thread is used for executing JavaScript code.
+
+🧵 Single Thread in Node.js:
+Node.js runs JavaScript code using a single thread, which means it is synchronous by default.
+Libuv: Node.js uses a library called libuv, which is written in C++. It handles the event loop and the thread pool.
+Node.js can still handle non-blocking I/O operations efficiently because of the event loop and libuv's thread pool.
+
+🔧 Execution Flow:
+When we run a Node.js program (e.g., with nodemon filename):
+A process is created.
+CPU is allocated to run that process.
+Inside the process, threads are created (could be one or more).
+Threads help in executing various tasks.
+
+🧵 Thread Pool:
+By default, the thread pool in Node.js has 4 threads.
+We can increase or decrease this number using the "UV_THREADPOOL_SIZE" environment variable.
+Thread pool helps with CPU-intensive or blocking tasks that the main thread cannot handle efficiently, such as:
+File system operations (fs module)
+Cryptographic operations (crypto module)
+DNS lookups (dns module)
+
+🧠 What the Main Thread Does:
+The main thread takes care of:
+1. Project initialization: When we run a Node.js file, the main thread starts by setting up the environment for our project. 
+It prepares the necessary memory, modules, and internal configurations to execute the code.
+2. require() of modules: The main thread processes all require() statements.
+It loads built-in, local, or third-party modules needed for the project before actual execution starts.
+3. Execution of top-level (global) code: Any code written outside of functions, callbacks, or event listeners is called top-level code.
+This code runs immediately and synchronously by the main thread.
+4. Registering callbacks: If the code contains async tasks like setTimeout(), fs.readFile(), or http requests. 
+It registers their callbacks and passes the task to the background (via libuv or thread pool), and continues execution.
+5. Running the event loop: Once top-level code is done, the main thread enters the event loop phase.
+The event loop keeps checking for registered callbacks that are ready to run (like when setTimeout expires or file reading completes).
+It handles those callbacks in the right phase and order.
+
+⏳ Event Loop Phases (Execution Order of Callbacks):
+1. Expired Timers Phase: Executes callbacks scheduled by setTimeout and setInterval (whose timers have expired).
+2. I/O Polling Phase: Executes callbacks from operations like fs.readFile, network requests, etc.
+3. Check (setImmediate) Phase: Executes callbacks from setImmediate.
+4. Close Callbacks Phase: Checks if any close event (like socket.on('close')) is pending. It ensures shutdown logic runs properly.
+
+🔁 Microtask Queue:
+Contains callbacks from:
+Promises
+process.nextTick()
+It has highest priority in the event loop.
+After every phase in event loop, the microtask queue is checked.
+If callbacks are present, they are executed before moving to the next event loop phase.
+If both process.nextTick() and Promise callbacks are pending:
+process.nextTick() executes first
+Then Promise callbacks
+Then the next phase of the event loop continues. 
+
+📘 Code Output Explanation of Eventloop.js:
+Answer is:
+Start  
+End  
+Timer Callback  
+Set Immediate Callback  
+Poll phase callback  
+Immd 2  
+Timer 2
+1. console.log("Start") and console.log("End")
+These are synchronous statements, so they are executed first in the order they appear
+2. setTimeout(() => {
+    console.log("Timer Callback")
+},0)
+Firstly, expired timers phase callback will run according to event loop order.
+3. setImmediate(() => {
+    console.log("Set Immediate Callback")
+})
+Then it runs the Set Immediate Callback from setImmediate because file reading is still happening in the background in thread pool.
+Once file reading will be complete, then it will come under I/O polling callbacks.
+4. fs.readFile("Demo.txt", (Data) => {
+    console.log ("Poll phase callback");
+    setTimeout(() => {
+        console.log("Timer 2");
+    },0)
+    setImmediate(() => {
+        console.log("Immd 2")
+    })
+})
+Once the file is read, its callback runs in the I/O Poll Phase:
+It prints "Poll phase callback" because console output will be printed first & then we will check next.
+Then we know that fs comes under I/O poll phase, so next we will check for check phase, that's why setImmediate callbacks runs first.
+And then after that event loop comes to first phase i.e. expired timer, that's why setTimeout runs at last.
