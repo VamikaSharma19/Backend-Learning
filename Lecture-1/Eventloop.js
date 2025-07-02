@@ -6,6 +6,11 @@ setTimeout(() => {
 setImmediate(() => {
     console.log("Set Immediate Callback")
 })
+function dosometask(){
+    return new Promise((resolve, reject)=>{
+        resolve("Promise callback")
+    })
+}
 fs.readFile("Demo.txt", (Data) => {
     console.log ("Poll phase callback");
     setTimeout(() => {
@@ -16,3 +21,12 @@ fs.readFile("Demo.txt", (Data) => {
     })
 })
 console.log ("End");
+dosometask().then((res)=>{
+    console.log(res)
+})
+.catch((err)=>{
+    console.log(err)
+})
+process.nextTick(()=>{
+    console.log("Next tick")
+})

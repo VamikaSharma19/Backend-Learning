@@ -51,7 +51,8 @@ Contains callbacks from:
 Promises
 process.nextTick()
 It has highest priority in the event loop.
-After every phase in event loop, the microtask queue is checked.
+At first microtask queue will be checked before executing or checking all callbacks.
+After every phase in event loop, the microtask queue is checked. 
 If callbacks are present, they are executed before moving to the next event loop phase.
 If both process.nextTick() and Promise callbacks are pending:
 process.nextTick() executes first
@@ -62,6 +63,8 @@ Then the next phase of the event loop continues.
 Answer is:
 Start  
 End  
+Next tick
+Promise callback
 Timer Callback  
 Set Immediate Callback  
 Poll phase callback  
@@ -69,16 +72,22 @@ Immd 2
 Timer 2
 1. console.log("Start") and console.log("End")
 These are synchronous statements, so they are executed first in the order they appear
-2. setTimeout(() => {
+2. process.nextTick(()=>{
+    console.log("Next tick")
+})
+"Next tick" is printed because after running all synchronous statements, it will check for the microtask queue callbacks.
+Both promise & process.nextTick() callback is present, but process.nextTick() one has higher priority of execution.
+3. "Promise callback" is printed after executing process.nextTick() callback.
+4. setTimeout(() => {
     console.log("Timer Callback")
 },0)
-Firstly, expired timers phase callback will run according to event loop order.
-3. setImmediate(() => {
+Then, expired timers phase callback will run according to event loop order.
+5. setImmediate(() => {
     console.log("Set Immediate Callback")
 })
 Then it runs the Set Immediate Callback from setImmediate because file reading is still happening in the background in thread pool.
 Once file reading will be complete, then it will come under I/O polling callbacks.
-4. fs.readFile("Demo.txt", (Data) => {
+6. fs.readFile("Demo.txt", (Data) => {
     console.log ("Poll phase callback");
     setTimeout(() => {
         console.log("Timer 2");
