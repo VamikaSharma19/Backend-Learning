@@ -1,10 +1,10 @@
 const file1 = require("./File1");
 console.log (file1);
 
-function sum (a,b) {
+function sum(a,b) {
     return a+b;
 }
-function sub (a,b) {
+function sub(a,b) {
     return a-b;
 }
 module.exports = {

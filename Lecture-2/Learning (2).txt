@@ -9,7 +9,6 @@ Just use the module name
 Use full path (relative or absolute)
 
 📚 For Importing & Exporting:
-
 ⚙️ CommonJS Module System (Default in Node.js): 
 Node.js uses CommonJS by default.
 To import a module:
