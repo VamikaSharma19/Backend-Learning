@@ -1,0 +1,55 @@
+📦 Modules in Node.js:
+A module is a reusable piece of code that is encapsulated (isolated) from other modules.
+Each module has its own scope, meaning its variables and functions do not leak outside unless exported.
+Modules help in splitting large codebases into manageable files.
+
+🛠 Built-in Modules (like fs, http)
+Just use the module name
+🧩 Custom Modules
+Use full path (relative or absolute)
+
+📚 For Importing & Exporting:
+
+⚙️ CommonJS Module System (Default in Node.js): 
+Node.js uses CommonJS by default.
+To import a module:
+const module = require('./moduleName');
+To export from a module:
+module.exports = { function1, function2 };
+🔍 How It Works:
+module.exports is an object.
+The require() function:
+Reads the entire file.
+Returns the exported object.
+
+🚀 ES Modules:
+Use import and export instead of require and module.exports.
+import { functionName } from './fileName.js';
+export const functionName = () => { ... };
+🛠 How to Enable:
+Add "type": "module" in package.json
+{
+  "type": "module"
+}
+OR use .mjs file extension
+
+♻️ Circular Dependency in Node.js: 
+Happens when modules depend on each other in a loop.
+Example: File1 → File2 → File1
+Node.js allows it but gives warnings.
+
+🧠 Node.js Internals:
+Maintains a hashmap for all required modules.
+If a module is still loading, Node returns an empty object.
+🛑 Other Languages:
+In most languages, this will throw an error.
+But Node.js continues but warns.
+
+✅ How to Avoid Circular Dependencies:
+🪄 Create a third shared module:
+Move common code to a third file to break the loop.
+export function helper() { ... }
+🧰 Use Tools like madge (For large scale projects):
+Helps visualize and analyze circular dependencies.
+Install with:
+npm install -g madge
