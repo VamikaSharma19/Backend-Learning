@@ -1,0 +1,55 @@
+📦 Modules vs Packages in Node.js
+A module in Node.js is simply a reusable piece of code (a JavaScript file) that has its own scope.
+A package is a module with a package.json file that describes the metadata of the project (name, version, dependencies, etc.).
+Hence, not all modules are packages, but every package is made up of one or more modules and must have a package.json file.
+
+⚙ What is npm?
+npm is a Node js Package Manager (it is not an abbreviation).
+It's used for:
+1. Creating packages
+2. Installing packages
+3. Publishing packages to the npm registry
+
+npm has its own central registry (https://www.npmjs.com/) where all public packages are available.
+We can upload our own package to this registry so others can use it.
+Popular packages like express and mongoose were written by others and published on npm—now they’re used by developers worldwide.
+
+📁 How to Create a Package?
+1. Go to project folder.
+2. Run the command:
+npm init
+This creates the package.json file with all the necessary metadata & we can also write our details (like package name).
+
+🔄 Transitive Dependencies
+A transitive dependency is a package that our package depends on indirectly.
+For example, if we install express, it also installs other packages that express itself depends on.
+All dependencies (direct and transitive) are stored inside the node_modules/ folder.
+
+💡 Using Code Without npm
+Technically, we can also use open-source packages without npm.
+But we’d need to manually copy all dependent files, including transitive dependencies, which is messy and inefficient.
+Using npm install automatically handles all this for us.
+
+🔍 Dependencies vs DevDependencies
+Dependencies: Required during runtime (i.e., when the app is live in production).
+DevDependencies: Only needed during development (e.g., testing tools, bundlers like Webpack, linters).
+
+🚀 Publishing our Own Package
+First, login to npm using:
+npm login
+To publish our package publicly:
+npm publish --access=public
+Our package name must be unique (globally on npm).
+
+If we make a mistake and want to republish:
+We cannot overwrite the existing version.
+Instead, change the version number in package.json and re-publish.
+
+📥 Installing a Custom Package
+To use our custom-created package in another project folder:
+First, initialize the new folder as a package using:
+npm init -y
+This quickly creates a default package.json file with all necessary fields.
+Then, install your custom package using:
+npm install package-name
+This downloads the package from the npm registry and adds it to the dependencies in package.json.

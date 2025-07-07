@@ -1,0 +1,15 @@
+{
+  "name": "package-vamika",
+  "version": "1.0.0",
+  "description": "This package does nothing ",
+  "license": "ISC",
+  "author": "vamika",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
