@@ -1,4 +1,4 @@
-# 🛠️ Backend Journey  
+# 🛠️ Backend Learning 
 This repository contains my backend development practice and lecture code.
 
 ### 📚 Topics Covered
