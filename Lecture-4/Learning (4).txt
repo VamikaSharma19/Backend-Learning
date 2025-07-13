@@ -1,0 +1,26 @@
+📦 Callback Functions:
+In JavaScript, callbacks are the functions passed as arguments to another functions to handle asynchronous operations.
+Such as reading/writing from a database, making API calls, etc.
+
+➡️ When using callbacks, the function waits for the asynchronous task to finish and then executes the callback.
+
+❗Error-First Callback Pattern:
+In Node.js (and many JavaScript environments), callbacks follow an "error-first" pattern:
+The first argument is always reserved for an error.
+The second one is the actual result.
+
+🔐 Promises:
+A Promise is an object that represents the eventual completion or failure of an asynchronous operation.
+A Promise has three states:
+Pending – Initial state, the operation hasn’t completed yet.
+Fulfilled – The operation completed successfully.
+Rejected – The operation failed.
+
+➡️ To handle a promise:
+.then() is used when the promise is fulfilled
+.catch() is used when the promise is rejected
+
+🔗 Promise Chaining:
+We can chain multiple .then() calls to perform actions sequentially to avoid callback hell.
+JavaScript does not allow multiple .catch() blocks for a single promise chain.
+Only one .catch() is used at the end to catch any errors from any part of the chain.
