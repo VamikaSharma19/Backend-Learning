@@ -1,0 +1,36 @@
+🔍 filter() always returns a new array:
+
+🔹In the first example:
+function isAllowed(id) {
+    let user = users.filter ((u) => {
+        return u.id == id
+    })
+    console.log(user);
+}
+isAllowed(1);
+Here, filter() returns an array of all users whose id matches the given id. 
+Even if only one user matches, it’s still returned inside an array (e.g., [ { id: 1, name: 'Vamika', age: 19 } ]).
+
+🔹In the second example:
+function isAllowed(id) {
+    let user = users.filter ((u) => {
+        return u.id == id
+    })[0]
+    console.log(user);
+}
+isAllowed(1);
+We're using [0] to access the first matched object directly from the filtered array. 
+Example Output: { id: 1, name: 'Vamika', age: 19 }
+
+⛓️ Why use Promise Chaining?
+Promise chaining helps in writing asynchronous code in a more sequential and readable manner. 
+It allows one async task to be completed before starting the next, making our code flow similar to synchronous logic.
+Every .then() returns a new promise, enabling promise chaining.
+
+⚡async/await:
+The async keyword is used to declare an asynchronous function.
+An async function always returns a promise, even if we don’t explicitly return one.
+Inside an async function, we can use the await keyword to pause execution until a promise is resolved.
+This allows asynchronous code to look and behave like synchronous code, making it much more readable and manageable.
+Even though the entire async function is asynchronous from the outside as it returns a promise, 
+The code inside it executes in a top-to-bottom, synchronous-like flow due to the use of await.
