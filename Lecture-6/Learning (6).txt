@@ -1,0 +1,28 @@
+📁 File System (fs) Module in Node.js:
+It is a built-in module that provides an API for interacting with the file system — reading, writing, updating & deleting files. 
+
+🔸fs.readFile() – Asynchronous File Reading:
+Reads the content of a file asynchronously, without blocking the execution of the program.
+🧠 How it works:
+We pass the file path, encoding (like 'utf-8'), and a callback function.
+The callback is invoked after the file is read.
+If there's an error (e.g., file not found), it's passed as the first argument in the callback.
+
+🔸fs.readFileSync() – Synchronous File Reading:
+Reads the content of a file synchronously, i.e., it blocks further code execution until the file is fully read.
+
+🔸 fs.writeFile() – Asynchronous File Writing:
+Writes data to a file asynchronously. If the file does not exist, it is created automatically.
+🧠 How it works:
+We provide the file path, the data to write, and a callback function.
+The callback is called after the write operation completes (or errors out).
+
+🔸 fs.writeFileSync() – Synchronous File Writing:
+Writes data to a file synchronously. Pauses further execution until the writing process is done.
+
+📌 fs.writeFile() & fs.writeFileSync() overwrite (delete) the existing content of the file by default & write the new given content.
+
+✅ Built-in vs Custom Modules (Path Concept):
+1. When we use a built-in module like fs, we can simply require it by name, there is no need to give full path.
+2. But when we create a custom module, we need to provide path for the module.
+This is because Node.js doesn’t know the location of our custom module unless we specify it.
