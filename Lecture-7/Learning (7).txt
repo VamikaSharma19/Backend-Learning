@@ -1,0 +1,19 @@
+hum object ko write nhi karva sakte hai fs.writeFile se
+
+agr humne users ko convert kar diya string mai, par udhar data file mai object likha hua aayega
+object ko ase nhi kar sakte hai, uske liye hum json use karte hai, jo ki hum object ko json mai convert kar dete hai
+json object ko string mai convert kar deta hai, key bhi string ho jati hai or value bhi string ho jati hai
+
+agar hum tostring use kar rhe hai toh hum dubara string ko object mai convert nhi kar sakte hai, json se hum dubara se kar sakte hai convert
+
+JSON.parse
+JSON.stringfy
+
+...spread wala??
+
+ye users or people ko jab hum normally add karvayenge toh tab kyu nhi hua add??
+
+concat method hota hai two arrays ko concat karne ke liye
+
+by default node js ka promise milta hai??
+
