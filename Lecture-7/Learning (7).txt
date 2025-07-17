@@ -1,19 +1,22 @@
-hum object ko write nhi karva sakte hai fs.writeFile se
+✨ In Node.js, the fs.writeFile() function expects data in the form of a string or a buffer.
+So, if we try to directly write a JavaScript object or array, it won’t work properly. We'll either get [object Object] or an error.
 
-agr humne users ko convert kar diya string mai, par udhar data file mai object likha hua aayega
-object ko ase nhi kar sakte hai, uske liye hum json use karte hai, jo ki hum object ko json mai convert kar dete hai
-json object ko string mai convert kar deta hai, key bhi string ho jati hai or value bhi string ho jati hai
+✅ Solution: Use JSON for object handling
+To store or retrieve an object or array in a file, we use JSON (JavaScript Object Notation).
 
-agar hum tostring use kar rhe hai toh hum dubara string ko object mai convert nhi kar sakte hai, json se hum dubara se kar sakte hai convert
+🔸 Two key JSON methods:
+1. JSON.stringify() – Converts a JavaScript object or array into a JSON-formatted string.
+2. JSON.parse() – Converts a JSON string back into a JavaScript object or array.
 
-JSON.parse
-JSON.stringfy
+🔍 Why not use .toString()?
+.toString() converts an object to a string like: [object Object].
+We cannot convert it back to the original object or array.
 
-...spread wala??
+🔄 Ways to Combine Arrays:
+1. Using Spread Operator (...): 
+let combined = [...users, ...people];
 
-ye users or people ko jab hum normally add karvayenge toh tab kyu nhi hua add??
+2. Using concat() method:
+let combined = users.concat(people);
 
-concat method hota hai two arrays ko concat karne ke liye
-
-by default node js ka promise milta hai??
-
+Both methods will create a single array containing all elements from both arrays.
