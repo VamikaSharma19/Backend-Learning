@@ -1,0 +1,10 @@
+[
+      {
+            "title": "Backend",
+            "description": "Complete given assignments"
+      },
+      {
+            "title": "CC",
+            "description": "Complete first practical"
+      }
+]
