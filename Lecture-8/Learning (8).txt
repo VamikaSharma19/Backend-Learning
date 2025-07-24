@@ -1,0 +1,119 @@
+📡 Server creation difference in Node.js using HTTP and Express:
+In Node.js, we can create a server using the built-in HTTP module. However, writing everything manually with HTTP becomes repetitive.
+That’s why we use Express.js, a lightweight framework that provides in-built methods and simplifies server creation.
+Just like we created custom modules to wrap and reuse fs functions. 
+Express has pre-written methods (like app.listen, app.get, etc.) that wrap HTTP logic into simpler APIs.
+
+🧱 Client-Server Architecture:
+In this architecture, the client is the one who sends a request (like a browser).
+The server is the system that handles the request and sends back a response.
+This client-server role is not fixed based on machines. 
+A machine can act as a client in one interaction and as a server in another, depending on who initiates the request and who responds.
+For the server to handle requests, it must be running and active. 
+If the server application is not running, it cannot accept any incoming requests.
+
+🏢 Data Centers & Local Hosting:
+Data centers like AWS or Google Cloud offer real-world servers (with CPUs, storage, databases, etc), where applications can be hosted. 
+However, since these are usually paid services, we often run our servers locally (on our own system) during development.
+
+🔌 Understanding Ports:
+To run a server locally, we need to bind it to a port, which is a communication endpoint between the server and the network.
+Physical ports: e.g., USB ports.
+Virtual ports: Logical channels (e.g., Port 3000) used by software to listen for requests.
+
+📌 Note on choosing ports:
+It's recommended to use ports between 1200 and 1500, as they are generally available.
+Avoid predefined or reserved ports (like 27017 for MongoDB), because using them may cause conflicts or break the running application.
+
+🔒 Why We Use Node.js (and Not Client-Side JS) for Servers:
+We do not create servers using client-side JavaScript, because:
+Client-side JS is exposed to the user (anyone can inspect it).
+Sensitive logic (like database access, authentication, payment handling) should be hidden from client & executed on the server only.
+Hence, we use Node.js on the backend to write and protect our server-side logic.
+
+🌐 URL Structure & Protocols:
+Take an example:
+URL: http://facebook.com/
+http → Protocol used for communication
+facebook.com → Domain name (human-readable identity of the server)
+/ → Endpoint (used to access specific resources)
+
+In Express, we define endpoints using methods like app.get('/home').
+Example:
+http://localhost:3000/watch
+/watch is an endpoint
+Endpoints help the server identify what kind of request or resource is being requested.
+
+🌍 IP Address vs Domain Name:
+Every server is identified by an IP address, but IPs are hard for humans to remember. 
+That’s why we use domain names, which are resolved to IPs using the DNS (Domain Name System).
+The process:
+Browser → Domain Name → DNS resolves → IP address → Request sent to Server
+
+📮 Types of HTTP Requests:
+GET – Retrieve a resource (like view a page or get user data).
+POST – Send new data to the server (like a form submission).
+PUT – Completely update an existing resource.
+PATCH – Partially update an existing resource.
+DELETE – Delete an existing resource.
+
+📤 Types of HTTP Responses:
+Servers can respond with different data formats:
+Plain text
+HTML documents
+Files (PDFs, images, etc.)
+JSON (Structured data for APIs)
+
+⚙️ Request (req) and Response (res) Objects:
+In Express, the callback in route methods like app.get() receives two objects:
+req → Contains all info about the incoming request (headers, URL, body, etc.)
+res → Used to send a response back to the client (send text, JSON, HTML, etc.)
+
+🆚 res.send() vs res.end():
+res.send(): Automatically sets response headers, Sends string or object (auto converts).
+res.end(): Does not set header, Sends only string or Buffer.
+
+🔸 Path Variables (Route Parameters):
+A path variable is a dynamic value inside the URL. It helps the server identify a specific resource requested by the user.
+
+🧭 Where are path variables used?
+Path variables are written after the endpoint in the URL, like this:
+/video/:id
+Here, :id is a placeholder for the actual value (e.g., a video ID).
+📺 Example – YouTube:
+When we click on a video on YouTube, the URL looks like:
+https://youtube.com/watch/abc123
+/watch/abc123 → Here, abc123 is the video ID
+This video ID is passed to the server as a path variable, so that YouTube knows which video to display.
+
+💡 Why are path variables needed?
+They are useful when we want to access specific content.
+
+🧾 Params Parameters vs Query Parameters:
+🔹 Params Parameters:
+Defined in the route using : (colon)
+Used for identifying specific resources.
+Example:
+app.get('/video/:id', (req, res) => {
+    const videoId = req.params.id;
+});
+URL: http://localhost:3000/video/123
+
+🔹 Query Parameters:
+Appended to URL using ? and separated using &.
+Used to send extra data.
+Example:
+app.get('/search', (req, res) => {
+    const searchId = req.query.q;
+    const pageId = req.query.page;
+});
+URL: http://localhost:3000/search?q=nodejs&page=2
+Here, q=nodejs and page=2 are query parameters.
+The & symbol is called an ampersand, and it's used to separate multiple query parameters.
+
+🔄 Important Consideration:
+Our endpoint in the client (browser) and our server-side endpoint must match exactly. 
+If we change the route name in our server code but not in the client, the request will fail.
+For example:
+app.get('/watch', ...)
+If we type localhost:3000/view in the browser, it won’t work because /view is not defined on the server.
