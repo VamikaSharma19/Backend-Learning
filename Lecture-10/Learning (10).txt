@@ -1,0 +1,63 @@
+📁 Serving Static/Public Files (Without Using a Static Folder Initially): 
+The static or public files are usually HTML, CSS, and JavaScript files. These are considered static because:
+They don’t contain any backend logic.
+They don’t perform any data processing or storage.
+They are visible to the browser and don't need to be hidden.
+
+If we inspect a webpage & open Network tab in DevTools, we can see all the request and response details for these static resources.
+
+Now, when we don’t use a static folder, we have to manually create individual routes or endpoints for each file.
+This becomes unmanageable, especially when our frontend contains many files.
+
+✅ Why We Use a Static Folder?
+To simplify things, we store all our static files in a folder like public/ or static/. Then we use the following middleware:
+app.use(express.static(__dirname + "/public"));
+This tells the server:
+To serve all static files (HTML, CSS, JS, images, etc.) directly from the public/ directory without needing custom routes.
+
+This way:
+The browser can automatically access files in the public folder.
+We don’t need to write a separate app.get() for each file.
+
+Also, by default, the server looks for index.html inside the static folder and serves it as the homepage.
+So, in our index.html, we must correctly reference all other files (like stylesheets and scripts) relative to it.
+
+However, if we try to access other files in the folder directly without going through index.html. 
+Those files may not work correctly unless properly linked.
+
+📨 Handling Forms (3 Things to Remember):
+When creating a form, always specify:
+action: The URL (endpoint) where the form data should be submitted.
+method: The HTTP method (POST is most common for forms).
+name: Every input should have a name attribute — this becomes the key in req.body.
+
+🔧 Middleware Explanation:
+app.use(express.urlencoded({extended:true}));
+This middleware is used to parse incoming request bodies from HTML forms.
+It allows Express to access req.body for POST requests coming from forms.
+
+🔄 Understanding res.json() and JSON Data:
+Sometimes, we send data back to the browser in JSON format. For example:
+res.json({
+    username: username,
+    password: password
+});
+This means we are sending an object (converted to JSON) as the response. 
+The browser (or client-side JavaScript) receives this in JSON format, which can be parsed and used easily.
+
+In Node.js, when we receive JSON data in a request, we must use a middleware like express.json() to parse it
+
+⚠️ Important: Don't Use Multiple Response Methods
+res.json({ username, password });
+res.send("User added");
+
+This will throw an error:
+Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+
+Why?
+res.json() internally calls res.send() — it sends the response and locks the headers.
+Once a response is sent, we cannot send another one.
+Express won’t allow us to send two responses for one request.
+
+✅ Correct Usage:
+Only use one of res.send(), res.json(), or res.end() per request.
