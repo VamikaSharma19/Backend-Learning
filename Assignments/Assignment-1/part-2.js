@@ -12,11 +12,11 @@ let description = process.argv[3];
 let obj = {title, description};
 fs.readFile("part-2.txt", "utf-8", function(err, data) { 
     let arr = [];
-    if(!err&&data!= "") {
+    if(!err && data!= "") {
         arr = JSON.parse(data);
     }
     arr.push(obj);
-    fs.writeFile("part-2.txt", JSON.stringify(arr, null, 6), function(err) {
+    fs.writeFile("part-2.txt", JSON.stringify(arr, null, 2), function(err) {
         if(err) return console.log(err);
         console.log("To-Do task written");
     })
