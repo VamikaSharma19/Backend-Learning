@@ -1,0 +1,32 @@
+📦 Important Concepts:
+1. app.use(express.json()) - 
+This is middleware that allows the Express app to automatically parse incoming JSON data in the request body & attach it to req.body.
+
+2. JSON Format - (key : value)
+In JSON, keys must be in string format, but values can be of multiple types. 
+Example :
+"age" : 19
+
+3. req.body -
+This is an object that holds the parsed JSON data from the request body.
+
+🔍 How the Request Works: 
+We are using Thunder Client (a REST API testing extension in VS Code) to send a POST request to:
+http://localhost:3012/hello
+In Thunder Client, we go to the Body tab and select JSON format.
+We then enter our data like this:
+{
+  "name": "Vamika",
+  "age": 19,
+  "email": "vamika@gmail.com"
+}
+This data is sent in the body of the POST request.
+
+📝 File Handling Logic: 
+We first read the content of hello.txt using fs.readFile.
+Once we get the data, we concatenate the new input with the existing content and then write it back using fs.writeFile.
+
+❌ Why not use fs.appendFile()?
+We avoided fs.appendFile() because:
+It simply appends data without giving us control over the entire file content.
+Here, we wanted to read and then append formatted data, making the write more structured.
