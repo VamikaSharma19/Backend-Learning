@@ -1,0 +1,88 @@
+📘 DOM (Document Object Model):
+It represents the structure of an HTML or XML document as a tree.
+The browser provides access to the DOM through the document API, which is part of the global window object.
+Other commonly used browser APIs include fetch, console, setTimeout, and more.
+
+🏗️ DOM Structure:
+The document API converts our HTML into a tree-like structure where each part of the HTML is a node.
+Document
+├── html
+│   ├── head (All are nodes)
+│   │   └── meta, link, script, etc.
+│   └── body
+│       └── div, ul, img, h1, p, etc.
+With the help of the document object, we can access, create, and manipulate any part of the HTML.
+
+📌 Accessing DOM Elements:
+In JavaScript, we can access HTML elements in different ways:
+✅ By ID:
+document.getElementById("heading")
+Returns a single element with the specified id.
+
+✅ By Class Name:
+document.getElementsByClassName("item")
+Returns a collection (HTMLCollection) of elements, since multiple elements can share the same class name.
+
+✅ By Tag Name:
+document.getElementsByTagName("p")
+Returns all elements with the given tag name (like <p>), as a collection.
+
+✅ Using querySelector():
+document.querySelector("p")
+document.querySelector(".item")
+document.querySelector("#heading")
+Returns only the first matching element.
+Works with tag names (div, p), classes (.), and IDs (#).
+
+✅ Using querySelectorAll():
+document.querySelectorAll(".item")
+Returns all matching elements as a NodeList (like an array).
+
+📌 Getting and Setting Content:
+We can retrieve or change the content of elements using:
+✅ innerText:
+Gets or sets the visible text inside an element.
+
+✅ innerHTML:
+Gets or sets the HTML content inside an element.
+
+✅ textContent:
+Similar to innerText, but includes hidden text and works regardless of CSS styles.
+
+📌 Modifying HTML Elements:
+We can replace or append new elements inside others using:
+ul.innerHTML = `<li class = "item"> Item 4 </li>` (Replaces all content)
+ul.innerHTML += `<li class = "item"> Item 5 </li>` (Add new content)
+
+📌 Attributes:
+✅ getAttribute(attributeName):
+Returns the value of the given attribute.
+If the attribute doesn’t exist, it returns null.
+
+✅ setAttribute(attributeName, value):
+Sets or updates the value of the given attribute.
+If written value already exists, it will be overwritten.
+
+✅ console.dir(element):
+Displays the element in the console as a JavaScript object, so we can inspect all its properties and methods.
+This is different from console.log() because log() prints the HTML, while dir() prints the object structure.
+
+📌 Class Manipulation with classList:
+We can add, remove, or check classes using the classList (DOMTokenList) property:
+
+✅ classList.add("classname")
+Adds the specified class.
+
+✅ classList.remove("classname")
+Removes the specified class.
+
+✅ classList.contains("classname")
+Returns true or false depending on whether the class exists.
+
+✅ classList.toggle("classname")
+Adds the class if it’s not present; removes it if it is.
+
+📌 Syntax to add event:
+Element.addEventListener("event name", function() {
+
+})
