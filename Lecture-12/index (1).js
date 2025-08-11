@@ -9,7 +9,7 @@ let todos = [
     }
 ]
 
-let todocontainer = document.querySelector(".todocontainer");
+let todocontainer = document.querySelector(".todocontainer")
 
 function addTodo(todo) {
     let li = document.createElement("li");

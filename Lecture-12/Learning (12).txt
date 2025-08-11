@@ -19,4 +19,4 @@ We created a small square box in HTML that changes its background color automati
 It stops changing when the Stop button is clicked & remain fixed at the last color that was displayed before the button was clicked.
 
 📌 In files (index (1).html & index (1).js):
-We created a basic Todo Application that displays a list of tasks using JavaScript and DOM manipulation.
+We created a basic Todo Application that displays a list of tasks using JavaScript & DOM manipulation.

@@ -24,7 +24,7 @@ genbtn.addEventListener("click", function() {
     },500)
 })
 
-// To stop color changing and keep the last color displayed
+// To stop color changing & keep the last color displayed
 stopbtn.addEventListener("click", function() {
     if(intervalId) {
     clearInterval(intervalId)
