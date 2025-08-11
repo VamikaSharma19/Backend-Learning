@@ -1,0 +1,22 @@
+📌 DOM: appendChild() vs append():
+To insert an element into the DOM, we must have its parent container.
+
+1️⃣ appendChild():
+Adds a single node (element or text node) to the end of a specified parent element’s child list.
+Rules:
+Accepts only one node at a time.
+Cannot directly insert text strings (must be a text node).
+Returns the appended node.
+
+2️⃣ append():
+Adds one or more nodes or text strings to the end of a specified parent element’s child list.
+Rules:
+Can append multiple nodes or strings in one call.
+Returns undefined (does not return the appended node).
+
+📌 In files (index.html & index.js):
+We created a small square box in HTML that changes its background color automatically when the Generate button is clicked.
+It stops changing when the Stop button is clicked & remain fixed at the last color that was displayed before the button was clicked.
+
+📌 In files (index (1).html & index (1).js):
+We created a basic Todo Application that displays a list of tasks using JavaScript and DOM manipulation.
