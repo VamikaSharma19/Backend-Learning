@@ -1,0 +1,17 @@
+📌 What is fetch()?
+fetch() is a built-in JavaScript function used to make HTTP requests (GET, POST, PUT, DELETE, etc.).
+It returns a Promise that resolves to a Response object.
+
+📌 Making a GET Request (Default Method):
+fetch('http://localhost:3002/users')
+    .then(res => res.json())       - (Converts JSON response to JavaScript object)
+    .then(data => console.log(data))
+    .catch(err => console.error("Error:", err));
+
+✅ Key points:
+Default method is GET.
+res.json() is another Promise — must be handled with .then() or await
+If the API or URL does not return JSON, we can use:
+.text() → for plain text
+.blob() → for images/files
+.formData() → for form data

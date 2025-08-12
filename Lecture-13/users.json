@@ -1,0 +1,20 @@
+[
+    {
+        "id" : "1",
+        "name" : "Vamika",
+        "username" : "Vamika2005",
+        "role" : "Admin"
+    },
+    {
+       "id" : "2",
+       "name" : "Ragni",
+       "username" : "Ragni2005",
+       "role" : "User"
+    },
+    {
+        "id" : "3",
+        "name" : "Vanshika",
+        "username" : "Vanshika2005",
+        "role" : "User"
+    }
+]
