@@ -1,0 +1,29 @@
+📌 What we have done here - 
+In this folder, we have created a User Data page that displays all registered users.
+When a new user is registered, an alert popup appears, and the form fields are automatically cleared.
+Later, when we visit the User Data page again, the previously registered users are displayed there.
+Additionally, all user information is also stored in a users.json file.
+
+📌 fetch() with POST Method: 
+When we want to send data (e.g. form data) to the server, we use the POST method.
+
+✅ Syntax - 
+fetch(URL, {
+    method: "POST",    (HTTP method)
+    headers: {
+        "Content-Type": "application/json"  (Type of data being sent)
+    },
+    body: JSON.stringify(data)      (Convert JS object to JSON string)
+})
+.then(response => response.json())    (Parse response into JS object)
+.then(data => {
+    console.log("Success:", data);
+})
+.catch(error => {
+    console.error("Error:", error);
+});
+
+📌 What is preventDefault()?
+It is a built-in JavaScript method that stops the browser’s default behavior for a particular event.
+When we submit a form, the default behavior is to reload/refresh the page and send form data to the server.
+Using preventDefault() stops that automatic reload so we can handle the data manually using fetch(). 
