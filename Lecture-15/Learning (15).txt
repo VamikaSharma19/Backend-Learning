@@ -1,0 +1,16 @@
+📌 What is Axios?
+Axios is a Promise-based HTTP client that works in both Node.js and the browser.
+It allows us to send HTTP requests (GET, POST, PUT, DELETE, etc.) to APIs and receive responses.
+It automatically transforms JSON data and supports features like request/response and error handling.
+
+📌 Some key points:
+1. The fetch() function is provided by browsers natively, 
+But Axios is a third-party library, so we have to explicitly include it in our folder.
+2. While inspecting the Network tab in the browser’s developer tools, we checked the type of data Axios was sending. 
+In the Content-Type header, it showed application/json, which means that by default Axios sends data in JSON format.
+3. Because of this, we added the express.json() middleware in our Express server to parse JSON request bodies. 
+Along with that, we also added another middleware to handle other possible content types, 
+since sometimes the type of incoming data is not known in advance.
+4. In Axios, the actual response data is accessed using response.data.
+
+➡️ We can use websites like JSONPlaceholder to get fake APIs for testing purposes.
