@@ -1,0 +1,54 @@
+📌 What is MongoDB?
+1. MongoDB is a NoSQL database that stores data in the form of documents (similar to JSON objects).
+2. These documents are stored in collections (similar to tables in relational databases).
+3. Internally, MongoDB stores data in BSON (Binary JSON) format.
+
+📌 What is Mongoose?
+1. Mongoose is an ODM (Object Data Modeling) library for MongoDB and Node.js.
+2. It helps map JavaScript objects to MongoDB documents.
+
+📌 Schema in Mongoose: 
+1. A Schema defines the structure of a document in a collection.
+2. It specifies the fields, their types, and any validations.
+
+📌 Model in Mongoose:
+1. A Model is a JavaScript class created from a Schema.
+2. It represents a MongoDB collection and provides methods to interact with the database.
+
+📌 Basic Mongoose Queries:
+(A) Create / Save Data - 
+♦️ save() → 
+Saves the current document instance to the database.
+Returns a Promise that resolves to the saved document.
+
+(B) Read Data -
+♦️ find() →
+Retrieves multiple documents that match the filter.
+Returns an array.
+
+♦️ findOne() →
+Retrieves the first matching document based on the filter.
+Can search by any field.
+
+♦️ findById() →
+Retrieves a single document by its _id.
+
+(C) Update Data - 
+♦️ findByIdAndUpdate() →
+Finds a document by _id and updates it in a single step.
+
+♦️ updateOne() → 
+Updates only the first document that matches the filter.
+
+♦️ updateMany() → 
+Updates all documents that match the filter.
+
+(D) Delete Data -
+♦️ findByIdAndDelete() → 
+Finds a document by _id and deletes it in a single step.
+
+♦️ deleteOne() → 
+Deletes only the first document that matches the filter.
+
+♦️ deleteMany() → 
+Deletes all documents that match the filter.
