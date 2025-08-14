@@ -1,3 +1,4 @@
+// We have executed request in this folder by using Thunder client.
 const fs = require('fs');
 const express = require('express');
 
