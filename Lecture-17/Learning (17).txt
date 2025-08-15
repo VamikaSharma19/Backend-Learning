@@ -1,0 +1,33 @@
+📌 Relationship Concepts in Mongoose: 
+1. One-to-One - 
+Meaning: One document in a collection is linked to exactly one document in another collection.
+Example: A user has one profile.
+
+2. One-to-Many -
+Meaning: One document is linked to multiple documents in another collection.
+Example: A user can have many blog posts.
+
+3. Many-to-One -
+Meaning: Multiple documents from one collection are linked to a single document from another collection.
+Example: Many blog posts belong to one user.
+
+4. Many-to-Many -
+Meaning: Multiple documents in one collection are linked to multiple documents in another collection.
+Example: A student can enroll in many courses, and each course can have many students.
+
+📌 What is mongoose.Schema.Types.ObjectId?
+It is a special data type provided by Mongoose (and MongoDB) to store references to documents in other collections.
+Think of it like a foreign key in SQL databases — it links one document to another.
+
+➡️ Why it is used?
+When we want to connect two collections in MongoDB (for example: User ↔ Blog).
+We need a way to store the ID of one document inside another document.
+In MongoDB, every document automatically gets a unique _id field.
+That _id is of type ObjectId (not a normal string or number).
+mongoose.Schema.Types.ObjectId is how we tell Mongoose:
+"This field will store another document’s _id."
+
+📌 What is populate() in Mongoose?
+It is a method that automatically replaces the ObjectId references in our document with the actual documents.
+Without populate() → We only see the IDs (ObjectId values).
+With populate() → We get the full data of the related documents.
