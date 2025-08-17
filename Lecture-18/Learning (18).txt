@@ -1,0 +1,11 @@
+📌 What we have done in this folder?
+In this folder, we have implemented blog deletion and updation for users. 
+Just like on Instagram, a user can only delete or update their own posts, here too only the owner of a blog can delete or update it.
+That’s why, for updating or deleting a blog, we need both the userId and the blogId.
+
+📌 Note:
+In HTTP, GET requests are used only to retrieve data from the server, which is why they don’t carry a request body. 
+Any information that needs to be passed in a GET request (like an ID or filter) is always sent through URL parameters or query strings.
+
+On the other hand, requests like POST, PUT, and DELETE are meant to send data to the server (to create, update, or remove something).
+That’s why these requests usually include a request body where the required data is provided.
