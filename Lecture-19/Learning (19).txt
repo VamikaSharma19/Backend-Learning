@@ -1,0 +1,25 @@
+📌 What we done in this folder?
+This is a Blogging Backend where users can register, create blogs, view blogs, and only the owner can update or delete their blogs. 
+All these operations are implemented using routes and managed through controllers for handling the logic.
+
+📌 Routes:
+Routes define the paths (URLs) that the client can request from the server.
+Each route is linked to a specific function (controller) that decides what response to send when that route is called.
+Routes are the "entry points" of our application that connect users to functionalities.
+
+📌 API (Application Programming Interface):
+It is a set of rules and endpoints that allow communication between client and server.
+In web development, APIs are usually built using HTTP methods:
+GET → Retrieve data
+POST → Create data
+PUT/PATCH → Update data
+DELETE → Remove data
+APIs provide a structured way for applications (frontend, mobile app, or external service) to interact with the backend.
+Example: A Blogging API have endpoints like:
+/api/users → manage users
+/api/blogs → manage blogs
+
+📌 Controllers:
+A controller is a part of backend architecture that contains the logic for handling incoming requests.
+When a request comes to a route, the route forwards it to the controller, and the controller decides how to process it.
+Controllers act as a bridge between the routes (API endpoints) and the database/services.
