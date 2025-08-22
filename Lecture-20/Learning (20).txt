@@ -1,0 +1,35 @@
+📌 Middleware:
+It is a function that executes on a client’s request before the controller function (the final request handler). 
+It can perform tasks such as logging, authentication, validation & modifying req & res objects before passing control to next function.
+All the functions that run on the request object (req) are considered middlewares. 
+
+📌 Types of Middleware:
+1. Application-Level Middleware - 
+Declared using app.use().
+Runs on every client request, regardless of the path.
+Example: logging or global authentication checks.
+
+2. Path-Level Middleware -
+Runs only on a specific path.
+Example: app.use("/api", middlewareFunction) will run the middleware only for requests that start with /api.
+
+3. Route-Level Middleware - 
+Runs on a specific route.
+Example: app.get("/users", middlewareFunction, controllerFunction) where the middleware executes only for the /users route.
+
+4. Error-Handling Middleware -
+Used to handle errors.
+Always defined with four parameters: (err, req, res, next).
+Runs only when an error is passed using next(err) or when an error is thrown inside a route/middleware.
+Should be placed after all routes and other middlewares.
+
+📌 Order of Execution:
+Middlewares are executed in the exact order they are defined in the code.
+First, all app.use() (application-level) middlewares are executed.
+Then path-level and route-level middlewares run (depending on the request).
+Finally, the controller function (the last function in the chain) executes.
+
+📌 Controller Function:
+It is usually the last function to run for a request. 
+However, since the controller also has access to the next parameter, it can behave like a middleware too. 
+If next() is called inside the controller, control is passed to the next matching middleware or error handler.
