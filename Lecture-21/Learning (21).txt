@@ -1,0 +1,19 @@
+📌 What we have done in these files?
+Both files i.e. users.js & index.js together implement User Authentication.
+The index file handles signup and login logic using Express and MongoDB.
+The model file defines the User schema for storing user details.
+
+🔑 Authentication vs Authorization:
+
+♦️ Authentication (Is the User Valid?) - 
+It means verifying the identity of a user.
+It checks "Who are you?"
+It is usually done through Email/Username + Password, OTP, Fingerprint, or Token.
+If authentication fails → user cannot even enter the system.
+If authentication succeeds → user is considered valid and can move forward.
+
+♦️ Authorization (Is the Request Valid?) - 
+It means verifying what actions the authenticated user is allowed to perform.
+It checks "What can you do?"
+Example: Different users may have different roles (admin, editor, normal user).
+Even if a user is authenticated, they may not have the right to access certain resources.
