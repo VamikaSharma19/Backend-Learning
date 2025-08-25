@@ -1,0 +1,47 @@
+📌 What we have done in this folder:
+We implemented JWT as on login, the server verifies user credentials and generates a JWT token with user details as payload.
+This token is sent to the client and must be included in the Authorization header for future requests.
+A middleware (isLogin) verifies the token on protected routes. If valid, the request proceeds; if not, access is denied.
+
+🔑 JWT (JSON Web Token) – Token Based Authentication
+
+♦️ Installation & Setup - 
+Installed from npm:
+npm install jsonwebtoken
+
+Required in folder:
+const jwt = require("jsonwebtoken");
+
+♦️ How JWT Works - 
+User Login Request → User sends email & password to server.
+Server Validates User → If valid, server creates a token. 
+Payload → Info we want to store inside token (e.g., user details).
+Secret Key → String known only to server, used to sign token (Ensures the token cannot be modified)
+Token Sent to Client → Client stores token (usually in localStorage).
+Client Requests Protected Route → Client attaches token in Authorization header
+Server Verifies Token:
+If valid → Allow access.
+If invalid/expired → Return error.
+
+♦️ JWT Structure - 
+A JWT has 3 parts separated by .
+header.payload.signature
+Header → algorithm & token type
+Payload → data (e.g., { "user": { "name": "Vamika" } })
+Signature → generated using secret key → ensures token is valid
+
+♦️ jwt.io Website - 
+We pasted our token at jwt.io → It shows payload (decoded data).
+If signature shows invalid → enter our SecretKey → it validates.
+
+📌 Stateful vs Stateless:
+1. Stateful Authentication - 
+Server stores user’s login session in memory or DB.
+Every request, server checks stored session.
+Example: Express sessions.
+
+2. Stateless Authentication (JWT) - 
+Server does NOT store session.
+Token itself contains the info (payload + signature).
+Each request is verified only using token + secret key.
+Example: Our Instagram feed request → server only checks token.
