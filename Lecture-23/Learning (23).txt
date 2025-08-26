@@ -1,0 +1,22 @@
+📌 What we have done in this folder?
+In this folder, we have built a blog management system with user authentication.
+
+♦️ User Management: 
+Users can be created and stored in the database with essential details such as email, username, and password.
+Each user also maintains a personal collection of blogs they have authored.
+
+♦️ Authentication & Security:
+The system uses JSON Web Tokens (JWT) to ensure secure access.
+When a user logs in with valid credentials, a token is generated and provided to them.
+This token must be included in subsequent requests, and the middleware verifies its validity before allowing access.
+Only authenticated users can perform protected operations, ensuring that data is secure and user-specific.
+
+♦️ Blog Management:
+Authenticated users can create new blogs. Each blog is automatically linked to the user who created it.
+Users can only update or delete their own blogs. 
+The system strictly checks ownership before making any modifications, thereby preventing unauthorized access.
+When a blog is deleted, its reference is also removed from the corresponding user’s record, keeping data relationships consistent.
+
+♦️ Database Relationships:
+A one-to-many relationship is maintained between users and blogs.
+Each blog document stores a reference to its author (user), while each user keeps a list of all blogs they own.
