@@ -1,0 +1,13 @@
+📌 What we have done in this folder - 
+User signs up with email, username, and password.
+On successful signup, a success message appears and the form resets.
+User logs in with credentials.
+On successful login, token and user ID are stored, a success message appears, and the form resets.
+After login, the user can:
+Add new blogs
+View all blogs 
+View their own blogs
+Update or delete their blogs 
+
+After logging in, if we want to check whether the token is stored, we click on Inspect, then go to the Application tab. 
+Under the Local Storage dropdown, select our localhost path, and there we can see the stored token.

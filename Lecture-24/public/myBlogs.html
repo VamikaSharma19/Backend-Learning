@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> My Blogs </title>
+</head>
+<body>
+  <h2>My Blogs</h2>
+  <div id="myBlogs"></div>
+
+<script>
+const token = localStorage.getItem("token");
+const userId = localStorage.getItem("userId");  // This will be saved after login
+
+async function loadMyBlogs() {
+  let res = await fetch(`/users/${userId}`, {
+    headers: { 
+      "authorization": token 
+    }
+  });
+  let data = await res.json();
+  let html = "";
+  data.data.blogs.forEach(blog => {
+    html += `
+      <h3>${blog.title}</h3>
+      <p>${blog.body}</p>
+      <button onclick="deleteBlog('${blog._id}')">Delete</button>
+      <button onclick="updateBlog('${blog._id}')">Update</button>
+      <hr>`;
+    });
+    document.getElementById("myBlogs").innerHTML = html;
+}
+
+async function deleteBlog(id) {
+  let res = await fetch(`/blogs/${id}`, {
+    method: "DELETE",
+    headers: { 
+      "authorization": token 
+    }
+  });
+  let data = await res.json();
+  alert(data.message);
+  loadMyBlogs();
+}
+
+async function updateBlog(id) {
+  let newTitle = prompt("Enter new title");
+  let newBody = prompt("Enter new body");
+
+  let res = await fetch(`/blogs/${id}`, {
+    method: "PUT",
+    headers: {
+      "content-type": "application/json",
+      "authorization": token
+    },
+    body: JSON.stringify({ title: newTitle, body: newBody })
+  });
+  let data = await res.json();
+  alert(data.message);
+  loadMyBlogs();
+}
+
+loadMyBlogs();
+</script>
+</body>
+</html>

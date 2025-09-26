@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> All Blogs </title>
+</head>
+<body>
+  <h2> All Blogs </h2>
+  <div id="allBlogs"></div>
+
+<script>
+  const token = localStorage.getItem("token");
+  async function loadBlogs() {
+    let res = await fetch("/blogs", {
+      headers : { 
+        "authorization" : token 
+      }
+    });
+    let data = await res.json();
+    let html = "";
+    data.data.forEach(blog => {
+      html += `<h3>${blog.title}</h3><p>${blog.body}</p><hr>`;
+    });
+    document.getElementById("allBlogs").innerHTML = html;
+  }
+  loadBlogs();
+</script>
+</body>
+</html>
