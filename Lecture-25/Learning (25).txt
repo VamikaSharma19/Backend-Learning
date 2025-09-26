@@ -1,0 +1,39 @@
+📌 Overview:
+PostgreSQL (Postgres) is a Relational Database Management System (RDBMS).
+For more documentation of postgres - neon documentation
+
+📌 Difference between SQL and PostgreSQL:
+SQL databases store data only in rows and columns (tabular format).
+PostgreSQL supports both tabular data and JSON format for storing semi-structured data.
+
+📌 GUI Tool: pgAdmin4
+pgAdmin4 is the official GUI tool for PostgreSQL.
+It allows us to easily connect to the PostgreSQL server and manage databases (for example, the dvdrental sample database).
+
+📌 PostgreSQL Command Line (CLI):
+1. Connect to PostgreSQL
+psql -U postgres
+
+2. Create a Database
+CREATE DATABASE dvdrental;
+
+3. List All Databases
+\l
+
+4. View All Tables in a Database
+\dt
+
+5. Switch to Another Database
+\c databaseName
+
+6. Restore a Database from Backup
+pg_restore -U postgres -d databaseName databasePath
+
+7. Exit PostgreSQL CLI
+exit
+
+📌 Additional Notes:
+PostgreSQL is case-insensitive (unless identifiers are quoted).
+The database backup we used came from a .tar file path.
+Similar to how MongoDB connects to the test database by default, PostgreSQL also connects to a default database. 
+To work on our own database, we must explicitly switch using \c.
