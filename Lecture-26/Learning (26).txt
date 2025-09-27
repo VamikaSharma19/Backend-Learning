@@ -1,0 +1,58 @@
+📌 Practice Questions (dvdrental sample database) -
+
+1. Display all distinct rental rates from the film table.
+= Select distinct rental_rate from film;
+
+2. List all film titles released in 2006.
+= Select title from film where release_year='2006';
+
+3. Show the first 5 films from the film table.
+= Select film_id, title, release_year from film order by title limit 5;
+
+4. Display all customers whose first name starts with 'A'.
+= Select first_name from customer where first_name like 'A%';
+
+5. Show the titles of films where the length is between 80 and 100 minutes.
+= Select title from film where length between 80 and 100;
+
+6. Display all customers who do not have a store_id.
+= Select store_id from customer where store_id is null;
+
+7. Show the film title and rental_rate, ordering by rental_rate in ascending order.
+= Select title, rental_rate from film order by rental_rate ASC;
+
+8. Display the top 10 shortest films by length.
+= Select title from film order by length ASC limit 10; 
+
+9. Show all films where the rating is either 'PG' or 'R'.
+= Select title, rating from film where rating='PG' or rating='R';
+
+10. Display all films where the rental_rate is 0.99, 2.99, or 4.99.
+= Select title, rental_rate from film where rental_rate='0.99' or rental_rate='2.99' or rental_rate='4.99';
+
+11. Show films where the description contains 'Action'.
+= Select title, description from film where description like '%Action%';
+
+12. Find customers whose last name ends with 'son'.
+= Select first_name, last_name from customer where last_name like '%son';
+
+13. Display all distinct years in which films were released.
+= Select distinct release_year from film;
+
+14. Show films with NULL release_year.
+= Select title from film where release_year is null;
+
+15. Display films where rental_rate is greater than 2.99 AND length is less than 9.0.
+= Select title, rental_rate from film where rental_rate>2.99 and length<9.0;
+
+16. Show all films where rating is not 'NC-17'.
+= Select title, rating from film where rating!='NC-17';
+
+17. Find films where the title starts with 'A' and ends with 'N'.
+= Select title from film where title like 'A%' and title like '%N';
+
+18. Show films where rental_rate is between 1.99 and 3.99, ordered by rental_rate descending.
+= Select title, rental_rate from film where rental_rate between 1.99 and 3.99 order by rental_rate DESC;
+
+19. Show the next 10 films after skipping the first 20.
+= Select title from film limit 10 offset 20; 
