@@ -1,0 +1,40 @@
+📌 Practice Questions (dvdrental sample database):
+
+1. Display each film's title and the language name using table aliases. 
+= Select f.title as "Film Title", l.name as "Language" from film f join language l on f.language_id = l.language_id;
+
+2. Find all customers and the addresses they live at. Display customer fullname as customer_name.
+= Select concat(c.first_name, ' ', c.last_name) as "Customer Name", a.address as "Address" from customer c join address a on c.address_id = a.address_id;
+
+3. List the title of films rented by customer ID = 1.
+= Select f.title as "Film Title" rented by Customer ID = '1' from film f join inventory i on f.film_id = i.film_id join rental r on i.inventory_id = r.inventory_id where r.customer_id='1';
+
+4. Find all films and show how many times they were rented. Include films that were never rented.
+= Select f.title as "Film Title", count (r.rental_id) as "Rented Amount" from film f join inventory i on f.film_id = i.film_id join rental r on i.inventory_id = r.inventory_id group by f.title, f.film_id;
+
+5. Display all categories and their film IDs also include categories with no films.
+= Select c.name as "Category Name", fc.film_id as "Film ID" from category c left join film_category fc on c.category_id = fc.category_id;
+
+6. List distinct film titles that were rented in May 2005.
+= Select distinct f.title as "Film Title", r.rental_date as "Rented Date" from film f join inventory i on i.film_id = f.film_id join rental r on r.inventory_id = i.inventory_id where r.rental_date>'2005-04-30' and r.rental_date<'2005-06-01' group by f.title, r.rental_date;
+
+7. List categories that currently have no films assigned. 
+= Select c.name as "Category Name" from category c left join film_category fc on c.category_id = fc.category_id where fc.film_id is null;
+
+8. Find average payment amount processed by each staff member.
+= Select s.staff_id as "Staff ID", AVG(p.amount) as "Average Payment" from staff s join payment p on s.staff_id = p.staff_id group by s.staff_id;
+
+9. Find films rented more than 10 times (title and rental_count).
+= Select f.title as "Film Title", COUNT(r.rental_id) as "Rental Count" from film f join inventory i on f.film_id = i.film_id join rental r on i.inventory_id = r.inventory_id group by f.title having COUNT(r.rental_id) > 10;
+
+10. Find the top 3 customers by total amount spent.
+= Select c.customer_id as "Customer Id", concat(c.first_name, ' ', c.last_name) as "Customer Name", sum(p.amount) as "Total Amount Spent" from customer c join payment p on c.customer_id = p.customer_id group by c.customer_id, "Customer Name" order by "Total Amount Spent" desc limit 3;
+
+11. List all actor-category pairs but only show pairs where category is 'Comedy'.
+= Select distinct concat(a.first_name, ' ', a.last_name) as "Actor Name", c.name as "Category Name" from actor a join film_actor fa on a.actor_id = fa.actor_id join film_category fc on fa.film_id = fc.film_id join category c on fc.category_id = c.category_id where c.name = 'Comedy';
+
+12. List all films and their rental counts (0 for never rented).
+= Select f.title as "Film Title", count(r.rental_id) as "Rental Counts" from film f left join inventory i on f.film_id = i.film_id left join rental r on i.inventory_id = r.inventory_id group by f.title;
+
+13. Determine which film category generated the highest total revenue (category name and revenue).
+= Select c.name as "Category Name", sum(p.amount) as "Total Revenue" from category c join film_category fc on c.category_id = fc.category_id join inventory i on fc.film_id = i.film_id join rental r on i.inventory_id = r.inventory_id join payment p on r.rental_id = p.rental_id group by c.category_id, c.name order by "Total Revenue" desc limit 1;
