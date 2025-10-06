@@ -1,0 +1,69 @@
+📌 ORM (Object Relational Mapping) - 
+ORM is used so that we don’t have to manually write SQL queries.
+It automatically connects our application to the database and allows us to perform database operations.
+
+📌 Prisma ORM - 
+Prisma is one of the best modern ORMs.
+
+1. To install Prisma, use:
+npm i prisma
+
+2. To initialize Prisma in your project, run:
+npx prisma init
+
+📌 About npx - 
+npx stands for Node Package Executer.
+It is used to execute commands or run tools like Prisma without installing them globally.
+
+📌 Prisma and Database Switching - 
+Prisma supports database flipping, which means we can easily switch between different databases.
+For example, if we initially used PostgreSQL but want to switch to MySQL,
+we just need to change the provider in the datasource db block inside the schema.prisma file.
+
+📌 Database Configuration - 
+We define the database connection string inside the .env file.
+Example (for PostgreSQL):
+DATABASE_URL="postgres://postgres:vamika1516@localhost:5432/lecture-28"
+5432 is the default port for PostgreSQL.
+The database here is running locally on the system.
+
+📌 Model Field Annotations - 
+In the Prisma schema file:
+String? → means the field is optional and can be null.
+@id → marks the field as a primary key and ensures it’s unique.
+@default → provides a default value when no value is given.
+@id @default(autoincrement()) → automatically generates increasing IDs (1, 2, 3, ...).
+Even if we delete a record (say ID 3), the next ID will continue as 4, not reuse 3.
+This means IDs are incremented first, then data is inserted — even after errors.
+
+📌 Prisma Migrations -
+Prisma provides a feature called migrations, which helps keep our schema.prisma file and actual database in sync.
+When we make changes in the schema (like adding new models or fields),
+we must also update those changes in the database using migrations.
+
+To create a migration, use:
+npx prisma migrate dev --name init
+Here, init is the name of the migration — we can replace it with any name we want.
+The migrations folder stores the history of all schema changes,
+so we can track every database modification made during development.
+
+📌 Prisma Client - 
+For every model we define in the schema, Prisma automatically generates client classes.
+These classes contain CRUD functions that let us interact with the database easily.
+
+Prisma automatically generates this client code whenever we run:
+npx prisma generate
+The generated client files are stored inside the generated folder (or in node_modules/@prisma/client by default).
+These are called Prisma Clients, and they are what we use in our code to talk to the database.
+
+📌 Checking Database in Command Line (PostgreSQL) - 
+To view your PostgreSQL database and tables:
+
+1. Open PostgreSQL CLI:
+psql -U postgres
+
+2. Switch to our specific database:
+\c lecture-28
+
+3. View all the tables in the database:
+\dt
