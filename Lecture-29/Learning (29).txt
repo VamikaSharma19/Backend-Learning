@@ -1,0 +1,10 @@
+📌 In this folder, we have created both Tweet and User modules — 
+Including their respective controllers & other supporting functions. 
+We have used Prisma ORM for database management and interactions.
+Each user can have their own tweets, means there is a one-to-many relationship between User and Tweet.
+
+📌 To view the database via the command line, follow these steps:
+psql -U postgres
+\c lecture-29
+Select * FROM "User";
+Select * FROM "Tweet";
