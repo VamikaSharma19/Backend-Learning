@@ -1,0 +1,36 @@
+📌 What is WebSocket?
+WebSocket is a full-duplex communication protocol that allows real-time communication between the client and the server.
+It means both the client and server can send and receive data simultaneously over a single connection.
+Unlike HTTP where the client must always initiate multiple requests.
+
+📌 HTTP vs WebSocket -
+
+🟢 HTTP	- 
+Works on a request–response model — the client sends a request and the server responds once.
+The connection closes after each response, so it is one-time and non-persistent.
+Communication is one-way, meaning only the client can initiate communication
+It has higher latency because a new connection is created for every request.
+Commonly used for static websites, REST APIs, and data fetching where real-time updates are not required.
+
+🟢 WebSocket -
+Works on persistent connection, which remains open once established.
+Allows two-way (full-duplex) communication between client and server.
+Provides low latency because data can be sent instantly without reopening connections.
+Ideal for real-time applications like chat systems, live tracking, stock updates, and multiplayer games.
+
+📌 How WebSocket Works -
+The client first sends a handshake request (HTTP upgrade request).
+The server accepts and establishes a persistent TCP connection.
+Once connected, both sides can exchange messages in real-time.
+
+📌 About the ws Module -
+ws is an npm package used in Node.js to create both WebSocket servers and clients.
+
+➡️ To install it:
+npm install ws
+
+📌 Common Events -
+1. "connection" → Triggered when a client successfully connects.
+2. "message" → Triggered when a client sends data.
+3. "close" → Triggered when the connection is closed.
+4. "error" → Triggered when there’s a connection or data error.
