@@ -1,0 +1,68 @@
+📌 What we have done in this folder?
+We implemented both ping and broadcasting functionalities.
+Using React, we created the frontend part of the project. When we send the message "ping", and 
+then open the browser's Inspect → Console, we can see "pong" printed there as a response from the server.
+However, if we send any message other than "ping", nothing will be printed in the console after inspection.
+
+📌 Ping-Pong and Broadcasting - 
+
+🟢 Ping-Pong: It's a simple test to check if the connection between the client and server is active.
+For example, when the client sends "ping", the server replies with "pong".
+
+🟢 Broadcasting: In this technique, when one client sends a message to the server, 
+the server forwards (broadcasts) that message to all other connected clients — not just the one who sent it.
+
+📌 Using Postman for Testing -
+In this project, we used Postman to test our WebSocket connection.
+We didn’t use Thunder Client because WebSocket support in Thunder Client requires a paid version.
+
+To connect through Postman - 
+Open Postman and click on "New Request".
+Select the WebSocket option.
+Enter the URL:
+ws://localhost:8888
+Click Connect – this will establish a WebSocket connection with the server.
+
+📌 Frontend and Backend Setup -
+We have created separate folders for the backend and frontend:
+The backend contains the Node.js WebSocket server.
+The frontend is built using React.
+
+To create a new React project for the frontend, we used:
+npm create vite@latest
+Then we selected:
+Framework: React
+Variant: JavaScript
+The rest of the settings were kept as default.
+
+📌 Frontend (React) and WebSocket -
+To use WebSocket in the frontend, we do not need any additional library.
+We can directly use the built-in WebSocket API provided by browsers.
+
+We run both the frontend and backend separately in different terminals — one for React and one for Node.js.
+For frontend reference code, we can also visit MDN Web Docs.
+
+📌 React Hooks Used - 
+
+🟢 useEffect – This hook is used to perform side effects in React, 
+such as establishing a connection with an external server (like a WebSocket).
+It’s mainly used for mounting, i.e. when a component is loaded for the first time.
+
+🟢 useState – This hook is used to manage state variables inside a React component.
+React does not support global variables directly, so we use useState to manage and update dynamic data across re-renders.
+
+📌 Mounting and Unmounting -
+1. Mounting: When a React component appears or loads in the DOM (Document Object Model) for the first time.
+2. Unmounting: When a React component is removed or destroyed from the DOM.
+
+📌 Difference Between useState and useRef - 
+
+🟢 useState:
+Used to store dynamic data that changes over time.
+Whenever the state value changes, the component re-renders.
+Commonly used when we want the UI to update — for example, form inputs, counters, or toggles.
+
+🟢 useRef:
+Used to store DOM references or mutable values that do not require re-rendering.
+Updating a ref does not cause the component to re-render.
+Commonly used to directly access DOM elements (like input fields) or to store values that should persist between renders.
