@@ -1,0 +1,15 @@
+📌 What are include and select in Prisma?
+When working with Prisma ORM, we often fetch data from the database using methods like findMany() or findUnique().
+To control which fields or related data should be retrieved, Prisma provides two key options:
+1. select
+2. include
+
+🟢 select — Used to fetch specific fields only
+This keyword allows us to retrieve only particular columns from a table and ignore the rest.
+
+🟣 include — Used to fetch related data (relations)
+This keyword allows us to retrieve related data from another table that is connected via a relationship (like one-to-many).
+
+⚠️ Important Rule -
+We cannot use include and select together at the same level in a Prisma query.
+However, we can nest them — meaning we can use one inside the other.
