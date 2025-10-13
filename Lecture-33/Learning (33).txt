@@ -1,0 +1,142 @@
+📌 What is uuid?
+uuid stands for Universally Unique Identifier.
+It is a Node.js package that helps generate unique IDs (identifiers) that never repeat, even across different applications.
+Each UUID is a long string made up of random numbers and letters, ensuring that every ID is unique.
+
+📌 Why do we use uuid?
+We use uuid when we need to uniquely identify something — for example :
+1. Unique user IDs in a database
+2. Unique message IDs in a chat app
+3. Unique session tokens or order numbers
+4. Assigning a unique key to React components
+It ensures that no two elements or users get the same ID.
+
+📌 How to Use uuid?
+After installing uuid - npm install uuid, we can import and use it like this:
+const { v4 : uuidv4 } = require('uuid');
+const uniqueId = uuidv4();
+console.log(uniqueId);
+
+📌 Explanation of uuid - 
+v4 generates a random UUID (version 4), which is the most commonly used version.
+Each time we call uuidv4(), it returns a different unique ID.
+
+
+📌 WebSocket Room-Based Chat System -
+
+➡️ Overview -
+The WebSocket allows multiple users to connect and communicate in different chat rooms, just like group chats in messaging apps.
+Each client can create, join, and chat within a specific room.
+
+➡️ Data Structure Used - 
+let rooms = new Map();
+
+The Map stores all chat rooms.
+Each key is a unique roomId, and the value is a Set containing all connected client sockets in that room.
+
+Example :
+rooms = {
+  "room1" : [socketA, socketB],
+  "room2" : [socketC]
+}
+So, users A and B are in room1, and user C is in room2.
+
+➡️ Connection Handling - 
+ws.on("connection", (socket) => { ... })
+
+This event triggers whenever a new user connects to the WebSocket server.
+The socket object represents that individual user connection.
+
+➡️ Message Handling -
+Each message received from a client is expected in JSON format, for example :
+
+{
+  "type" : "join",
+  "payload" : { "roomId" : "abc123" }
+}
+
+This code extracts type and payload to understand the user’s action :
+let parseMessage = JSON.parse(message);
+let { type, payload } = parseMessage;
+
+➡️ Type : "join" - 
+if (type === "join") {
+  let { roomId } = payload;
+
+  if (!rooms.get(roomId)) {
+    rooms.set(roomId, new Set());
+  }
+
+  rooms.get(roomId).add(socket);
+  socket.roomId = roomId;
+  socket.send("Added to room");
+}
+
+🟢 Explanation ->
+When a user sends a "join" request with a room ID :
+The server checks if the room exists; if not, it creates a new one.
+The user’s socket is added to the room’s Set.
+The socket is assigned the roomId property to track which room it belongs to.
+A confirmation message ("Added to room") is sent back to the client.
+
+Example :
+If a user joins room "abc123", the Map becomes :
+rooms = {
+  "abc123" : Set(1) { socketA }
+}
+
+➡️ Type : "chat" -
+else if (type === "chat") {
+  let { message } = payload; 
+  let { roomId } = socket; 
+  let allClients = rooms.get(roomId);
+  allClients.forEach((s) => {
+    s.send(message.toString());
+  });
+}
+
+🟢 Explanation ->
+When a user sends a chat message :
+The server finds the user’s room using socket.roomId.
+It retrieves all clients in that room.
+The server then broadcasts the message to every client in the same room.
+
+Example :
+If room "abc123" has clients A, B, and C —
+when A sends a message "Hello", both B and C receive it.
+
+➡️ Type : "create" -
+else if(type == "create") {
+  let roomId = uuidv4();
+  socket.send(JSON.stringify ({
+    type : "create",
+    payload : {
+      "roomId" : roomId
+    }
+  }))
+}
+
+🟢 Explanation ->
+When a client wants to create a new chat room :
+The server generates a unique room ID using uuidv4().
+It sends the new roomId back to the client as a JSON response.
+
+Example :
+The server responds with:
+{
+  "type" : "create",
+  "payload" : { "roomId" : "xyz987" }
+}
+The client can then share this room ID with others so they can join.
+
+➡️ Complete Flow - 
+
+1️⃣	Create Room :
+Client sends { type : "create" }. 
+Server replies with a new roomId.
+2️⃣	Join Room :	
+Clients send { type : "join", payload : { roomId } }. 
+Server adds them to the room.
+3️⃣	Send Chat :
+Client sends { type : "chat", payload : { message } }. 
+Server broadcasts to all in the room.
