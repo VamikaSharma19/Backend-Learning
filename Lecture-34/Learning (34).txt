@@ -1,0 +1,45 @@
+📌 What is Redis?
+Redis is an in-memory data store — extremely fast because it stores data in RAM.
+Common uses : Caching, session store, and storing small structured objects (hashes).
+Data types : Strings, hashes (field → value mapping), lists, sets, sorted sets, bitmaps, streams, etc.
+Pros : Low latency, simple API, many data structures.
+Cons : Data is in memory (so size limited by RAM) — configure persistence if we want data to survive we have to restart.
+
+📌 What is Docker?
+Docker is a containerization platform that packages an application and its dependencies into a portable container image.
+Containers isolate apps from the host environment while sharing kernel resources — 
+They are lightweight compared to virtual machines.
+Use Docker to run services (like Redis) reproducibly on any machine without manual installation.
+
+📌 Command-by-command Explanation -
+
+1. docker run redis -
+Runs the redis image and starts a container.
+
+➡️ Default behavior without flags : 
+The container runs attached to our terminal (stdout/stderr show in the terminal). 
+If we close the terminal (or press Ctrl+C), the container will stop.
+If the image is not present locally, Docker will pull redis:latest.
+
+2. docker run -p 6379:6379 redis -
+Starts a container and maps the container’s port 6379 (Redis default) to the host’s port 6379.
+This makes Redis reachable from the host at localhost:6379.
+-p = This is how we usually run Redis for local development, but if we close the terminal, container will stop running. 
+
+3. docker run -d -p 6379:6379 redis -
+-d (detached mode) : 
+Container runs in the background and our terminal is free.
+
+4. docker ps -
+Lists running containers. 
+Useful columns : CONTAINER ID, IMAGE, STATUS, PORTS, NAMES.
+
+5. docker run -p 6379:6379 redis:latest -
+redis:latest = Explicitly uses the latest tag of the Redis image (same as just redis by default).
+
+6. docker exec -it containerId redis-cli - 
+This opens a Redis CLI prompt inside the running container so we can run Redis commands interactively.
+
+7. set "user" '{"name":"Vamika", "age":"19"}' -
+This is a Redis command (used inside redis-cli) that stores a single string value under the key user.
+It stores the JSON as a plain string value.
