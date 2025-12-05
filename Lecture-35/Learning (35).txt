@@ -1,0 +1,52 @@
+📌 BullMQ -
+BullMQ is a job queue library for Node.js that works on top of Redis.
+It helps us run tasks in the background instead of blocking the main server.
+
+📌 Why do we use BullMQ?
+In many applications, some tasks take time, like:
+Running code (LeetCode-style), sending emails, processing images or videos, generating reports & handling notifications.
+If we do these tasks inside the API request, the user has to wait and the server becomes slow.
+BullMQ solves this problem by running such tasks asynchronously.
+
+📌 How BullMQ Works -
+BullMQ has two main parts:
+
+1️⃣ Queue (Producer side) :
+Queue is like a list where we add jobs.
+
+In our code:
+let codeQueue = new Queue("code-queue", { connection: { host: "localhost", port: 6379 }});
+Jobs are stored in Redis.
+When the API receives a submission, it adds a job to the queue.
+
+Example job:
+codeQueue.add("code-queue", { qId, code, language });
+
+2️⃣ Worker (Consumer side) :
+Worker automatically reads jobs from the queue and processes them in the background.
+
+In our code:
+let worker = new Worker("code-queue", function(job) {
+    console.log(job.data);
+});
+Worker picks jobs one by one.
+Runs the task (like executing code).
+Returns the result.
+Does not affect API speed.
+
+📌 Redis Connection - 
+BullMQ uses Redis to store:
+Waiting jobs, completed jobs, failed jobs, job progress, retries.
+Redis works like a very fast storage engine for queues.
+
+📌 Job Lifecycle -
+A job is added to the queue.
+Worker picks the job and processes it.
+Job becomes completed or failed.
+BullMQ manages all these states internally.
+
+➡️ Example: Like LeetCode
+User submits code → API adds a job to the queue
+API instantly returns a submissionId
+Worker runs the code in the background
+After finishing, it creates a result.
