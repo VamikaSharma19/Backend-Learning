@@ -1,0 +1,83 @@
+📌 Monolithic Architecture - 
+It is a single large application where all components (authentication, product service, notifications, UI rendering, etc.) are tightly coupled and run together as one unit.
+
+➡️ Characteristics:
+One codebase and one deployment.
+All modules share the same memory and resources.
+Scaling happens by cloning the entire application.
+
+➡️ Drawbacks:
+A small change requires redeploying the whole system.
+Difficult to maintain as the project grows.
+Hard to scale individual components.
+
+📌 Microservices Architecture -
+It breaks the application into small, independent services.
+Each service has its own codebase, can run independently & communicates through APIs or messaging systems.
+
+➡️ Benefits:
+Easy to scale individual services.
+Technology flexibility (each service can use different languages).
+Small, manageable codebases.
+Fault isolation — if one service fails, others continue working.
+
+🟢 Why microservices need messaging?
+Because different services must communicate efficiently without becoming tightly coupled. 
+Redis Pub/Sub is one such communication method.
+
+📌 WebSocket vs Polling -
+1. Polling
+Client repeatedly asks the server: "Do you have any new data?"
+Limitations:
+Wastes network bandwidth.
+High latency.
+Not efficient for real-time systems.
+
+2. WebSockets
+Persistent full-duplex connection between client and server.
+Limitations:
+Hard to scale across multiple servers.
+Requires sticky sessions or shared caching layer.
+
+📌 Redis Pub/Sub (Publish-Subscribe Model) - 
+Redis Pub/Sub allows services to communicate asynchronously.
+A Publisher sends messages to a channel.
+A Subscriber listens to the channel and receives messages in real time.
+Redis does not store messages — subscribers must be online to receive them.
+
+📌 Overall Flow of Services - 
+Service 1 (Publisher) ---- publishes message ----> Redis ----> delivers to ----> Service 2 (Subscriber)
+
+📌 Running Redis in Docker -
+1. Checking Running Docker Containers:
+The command:  docker ps
+It is used to view all running Docker containers. This command displays important details such as:
+Container ID, Image name, Status, Ports, Container names
+We use the Container ID to access the Redis CLI inside the container.
+
+➡️ Command to open Redis CLI inside a container:
+docker exec -it <container_id> redis-cli
+
+We have open one panel for subscriber & one for publisher as shown in Panel.png, but we can open as many as panels for subscribes & one for publisher. 
+
+2. Subscribing to a Redis Channel:
+To subscribe to a channel named notify-me, we use
+SUBSCRIBE notify-me
+This means the current Redis CLI session is now listening to the notify-me channel.
+Any message published to this channel will be immediately received here.
+
+3. Publishing a Message to the Channel:
+To publish a message to all subscribers of the channel, we run
+PUBLISH notify-me "RN"
+This sends the string "RN" to every subscriber that is connected to the notify-me channel.
+Redis Pub/Sub automatically delivers the message to all subscribers, no matter how many there are.
+
+4. How Service 1 and Service 2 Work Together:
+To print the notification message defined in Service 1, we follow this order as shown in Console.png:
+Start Service 2 first
+Service 2 subscribes to the "notify" channel.
+It waits for incoming messages.
+Then start Service 1
+Service 1 publishes a JSON message on the "notify" channel.
+Once Service 1 publishes the message, Service 2 immediately receives & prints it because it is already subscribed to that channel.
+This demonstrates real-time communication between two microservices using Redis Pub/Sub.
