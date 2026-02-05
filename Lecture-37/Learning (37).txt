@@ -1,0 +1,45 @@
+📌 What is Indexing?
+Indexing is a database technique used to speed up data retrieval from a table or collection.
+An index works like a book index, where we can directly find the required page instead of reading the entire book.
+
+📌 Why Indexing is Needed?
+Without indexing, the database performs a full table scan.
+Full table scan means checking each row one by one & this becomes slow when data is large.
+Indexing allows faster search, filtering, and sorting.
+
+📌 How Indexing Works?
+An index stores an indexed column value which pointes to the actual row/document.
+When a query uses an indexed column, it uses the index first and then directly jumps to the required data.
+
+📌 Indexing in PostgreSQL -
+Creating an Index:
+CREATE INDEX idx_phone ON address(phone);
+
+Speeds up queries like:
+SELECT * FROM address WHERE phone = '28303384290';
+
+📌 Indexing in MongoDB -
+Creating an Index:
+db.users.createIndex({ age: 1 });
+
+📌 Types of Indexes - 
+1. Single Column Index - (Index on one column)
+2. Composite Index – (Index on multiple columns)
+3. Unique Index – (Prevents duplicate values)
+4. Primary Index – (Automatically created on primary key)
+
+📌 What is the Singleton Pattern?
+This pattern ensures that class has only one instance throughout the application & provides global access point to that instance.
+In other words, the object is created only once and same object is reused everywhere.
+
+📌 Real-World Analogy of Singleton Pattern -
+School System Example:
+A school can have many teachers and students, but it should have only one Principal.
+So no matter how many times the Principal is requested, the same Principal object must be returned.
+
+📌 Key Rules of Singleton Pattern -
+To implement a Singleton, we must follow these rules:
+1. The class should have only one instance
+2. The instance should be stored inside the class
+3. Object creation should be restricted
+4. Access should be provided via a static method
