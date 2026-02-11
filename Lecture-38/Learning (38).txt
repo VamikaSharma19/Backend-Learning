@@ -1,0 +1,136 @@
+📌 Why Docker?
+Docker is a containerization tool that allows us to package an application along with all its dependencies into a single unit called a container.
+
+A container works like a box that contains everything required to run an application, such as:
+Operating system libraries
+Runtime environment (Node.js, Java, Python, etc.)
+Application code
+Required dependencies
+Because of this, a Docker container is isolated from the host system and other containers.
+
+Using Docker, we can run the same application anywhere (local machine, server, cloud) without worrying about system requirements or configuration issues.
+
+📌 What is a Docker Image?
+A Docker Image is a set of instructions or a blueprint used to create a container.
+It defines:
+Which base environment to use
+Which dependencies to install
+Which commands to run
+How the application should start
+
+📌 Real-Life Example -
+Recipe → Docker Image
+Baked Cake → Docker Container
+Just like a recipe gives instructions to make a cake, a Docker image gives instructions to create a container.
+
+📌 Image vs Container - 
+First, a Docker Image is created, then image runs and the running instance of an image is called a Docker Container.
+A container is simply a running image.
+
+📌 Docker Engine -
+The Docker Engine is the core component of Docker.
+It is responsible for:
+Building images
+Running containers
+Stopping containers
+Deleting containers and images
+
+➡️ We do not interact directly with Docker Engine.
+
+📌 Docker CLI (Command Line Interface) -
+The Docker CLI is used to interact with the Docker Engine.
+Using the CLI, we can:
+Run commands
+Build images
+Start or stop containers
+View logs and container status
+
+➡️ All Docker commands (docker build, docker run, etc.) are executed using the Docker CLI.
+
+📌 Docker Registry - 
+A Docker Registry is a storage location for Docker images.
+It stores images globally.
+Images can be uploaded and downloaded.
+
+➡️ The most popular registry is Docker Hub, it contains offical images, public images created by developers & private images with proper authentication.
+
+📌 Port Mapping -
+A port is a communication endpoint. Port mapping allows communication between host machine and docker container.
+Flag used:
+-p hostPort:containerPort
+
+Example:
+-p 3000:3000
+
+📌 Base Image -
+A Base Image is the starting point of a Docker image.
+Examples:
+node:latest
+python:3.10
+openjdk:17
+
+➡️ It provides operating system layer and runtime environment. All custom Docker images are built on top of a base image.
+
+📌 Building a Docker Image -
+docker build -t express-app:latest .
+
+Explanation:
+docker build → builds an image
+-t → tag
+express-app → image name
+latest → version
+. → current directory (Dockerfile location)
+
+📌 Reducing Docker Image Size -
+Use lightweight base images (e.g. node:alpine)
+Remove unnecessary files
+Use .dockerignore
+Install only required dependencies
+
+📌 Pulling PostgreSQL Image -
+docker pull postgres:latest
+
+Explanation:
+Docker checked locally → image not found
+Pulled image from Docker Hub (library/postgres)
+Multiple layers downloaded
+Image successfully stored locally
+
+📌 Pulling and Running MongoDB Container -
+docker run -p 27017:27017 mongo 
+
+Explanation:
+Docker couldn’t find mongo image locally
+Automatically pulled mongo:latest
+Started MongoDB container
+Port mapping: Host 27017 → Container 27017
+MongoDB logs appeared, confirming the server started.
+
+📌 Commands Explanation of Dockerfile -
+1. FROM node:latest
+This command selects the base image for the container.
+node:latest means Node.js is already installed & latest stable Node version will be used. 
+Every instruction after this runs inside this image.
+
+2. WORKDIR /app
+Sets the working directory inside the container.
+If /app does not exist, Docker creates it automatically.
+All next commands (COPY, RUN, CMD) will be executed inside /app folder.
+
+3. COPY . .
+Copies files from host machine → container
+First . → current folder on your system (where Dockerfile is present)
+Second . → current folder inside container (/app because of WORKDIR)
+This means copy everything from my project folder into /app inside the container.
+
+4. RUN npm install
+Executes a command during image build time.
+Since WORKDIR is /app, this command runs inside /app.
+Installs all dependencies listed in package.json.
+
+5. CMD ["node", "server.js"]
+Defines the default command when the container starts.
+Runs after the image is built, at container runtime.
+It executes node server.js inside /app.
+
+➡️ Only one CMD is allowed in a Dockerfile (last one counts).
